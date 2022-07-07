@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="GreenBlueStyle" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:background">@drawable/green_blue_gradient</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">5dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+    <style name="LightLightGrayStyle" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:background">@drawable/light_light_gray_box</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">5dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+    <style name="LightGrayStyle" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:background">@drawable/light_gray_box</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">5dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+    <style name="DarkGrayStyle" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:background">@drawable/dark_gray_box</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">5dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+    <style name="DarkGreenStyle" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:background">@drawable/dark_green_box</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">5dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+    <style name="CropCyanStyle" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:background">@drawable/crop_cyan_box</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+    <style name="CropDarkGrayStyle" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:background">@drawable/crop_dark_gray_box</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">5dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+
+</resources>

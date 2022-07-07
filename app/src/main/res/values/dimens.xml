@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="exams_time_margin_start">20dp</dimen>
+    <dimen name="guideline_header_percent">0.1387</dimen>
+    <dimen name="guideline_exams_time_percent">0.3387</dimen>
+    <dimen name="guideline_classes_percent">0.54676</dimen>
+    <dimen name="guideline_homework_percent">0.86128</dimen>
+    <dimen name="exams_time_container_margin_end">20dp</dimen>
+    <dimen name="header_container_margin_start">20dp</dimen>
+    <dimen name="header_container_margin_end">20dp</dimen>
+    <dimen name="footer_container_margin_start">20dp</dimen>
+    <dimen name="footer_container_margin_end">20dp</dimen>
+    <dimen name="classes_container_margin_start">20dp</dimen>
+</resources>

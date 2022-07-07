@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!--region Горизонтальная разметка (Guideline) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline_header_percent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_exams_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline_exams_time_percent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_classes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline_classes_percent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_homework"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline_homework_percent" />
+    <!--endregion-->
+
+    <!--region Заголовок (Header) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_container"
+        android:layout_width="@null"
+        android:layout_height="@null"
+        android:layout_marginStart="@dimen/header_container_margin_start"
+        android:layout_marginEnd="@dimen/header_container_margin_end"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="@null"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:maxLines="2"
+            android:text="Привет, Владимир!"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/header_search_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/header_search_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_baseline_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/header_settings_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/header_settings_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="15dp"
+            android:rotation="90"
+            android:src="@drawable/ic_baseline_settings"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/header_face_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--region Мой логтип-->
+        <ImageView
+            android:id="@+id/header_face_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_circle_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/header_face_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_baseline_face_one"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--endregion-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--endregion-->
+
+    <!--region Таймер экзамена (Exams) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/exams_time_container"
+        style="@style/GreenBlueStyle"
+        android:layout_width="@null"
+        android:layout_height="@null"
+        android:layout_marginStart="@dimen/exams_time_margin_start"
+        android:layout_marginEnd="@dimen/exams_time_container_margin_end"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_exams_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_header">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Вы готовы к экзамену?"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/exams_time_days_hours_minutes_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <!--region Дни (десятки) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exams_time_days_decade"
+                style="@style/LightGrayStyle"
+                android:layout_width="37dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@id/exams_time_days_title"
+                app:layout_constraintEnd_toStartOf="@id/exams_time_days_units"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--endregion-->
+            <!--region Дни (единицы) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exams_time_days_units"
+                style="@style/LightGrayStyle"
+                android:layout_width="37dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintTop_toTopOf="@id/exams_time_days_decade"
+                app:layout_constraintEnd_toStartOf="@id/exams_time_dots_days_hours"
+                app:layout_constraintStart_toEndOf="@id/exams_time_days_decade">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--endregion-->
+            <!--region Двоеточие между днями и часами -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exams_time_dots_days_hours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/exams_time_days_decade"
+                app:layout_constraintStart_toEndOf="@id/exams_time_days_units"
+                app:layout_constraintTop_toTopOf="@id/exams_time_days_decade">
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_baseline_circle_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_baseline_circle_white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--endregion-->
+            <!--region Часы (десятки) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exams_time_hours_decade"
+                style="@style/LightGrayStyle"
+                android:layout_width="37dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="@id/exams_time_days_decade"
+                app:layout_constraintBottom_toBottomOf="@id/exams_time_days_decade"
+                app:layout_constraintStart_toEndOf="@id/exams_time_dots_days_hours">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--endregion-->
+            <!--region Часы (единицы) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exams_time_hours_units"
+                style="@style/LightGrayStyle"
+                android:layout_width="37dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintTop_toTopOf="@id/exams_time_days_decade"
+                app:layout_constraintStart_toEndOf="@id/exams_time_hours_decade">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--endregion-->
+            <!--region Двоеточие между часами и минутами -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exams_time_dots_hours_minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/exams_time_days_decade"
+                app:layout_constraintStart_toEndOf="@id/exams_time_hours_units"
+                app:layout_constraintTop_toTopOf="@id/exams_time_days_decade">
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_baseline_circle_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_baseline_circle_white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--endregion-->
+            <!--region Минуты (десятки) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exams_time_minutes_decade"
+                style="@style/LightGrayStyle"
+                android:layout_width="37dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="@id/exams_time_days_decade"
+                app:layout_constraintBottom_toBottomOf="@id/exams_time_days_decade"
+                app:layout_constraintStart_toEndOf="@id/exams_time_dots_hours_minutes">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--endregion-->
+            <!--region Минуты (единицы) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exams_time_minutes_units"
+                style="@style/LightGrayStyle"
+                android:layout_width="37dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintTop_toTopOf="@id/exams_time_days_decade"
+                app:layout_constraintBottom_toBottomOf="@id/exams_time_days_decade"
+                app:layout_constraintStart_toEndOf="@id/exams_time_minutes_decade">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--endregion-->
+            <TextView
+                android:id="@+id/exams_time_days_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Дни"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintStart_toStartOf="@id/exams_time_days_decade"
+                app:layout_constraintEnd_toEndOf="@id/exams_time_days_units"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                android:id="@+id/exams_time_hours_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Часы"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@id/exams_time_hours_decade"
+                app:layout_constraintEnd_toEndOf="@id/exams_time_hours_units"
+                app:layout_constraintBottom_toBottomOf="@id/exams_time_days_title"/>
+            <TextView
+                android:id="@+id/exams_time_minutes_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Минуты"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@id/exams_time_minutes_decade"
+                app:layout_constraintEnd_toEndOf="@id/exams_time_minutes_units"
+                app:layout_constraintBottom_toBottomOf="@id/exams_time_days_title"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--endregion-->
+
+    <!--region Занятия (Classes)-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/classes_container"
+        android:layout_width="@null"
+        android:layout_height="@null"
+        android:layout_marginStart="@dimen/classes_container_margin_start"
+        android:layout_marginEnd="@dimen/classes_container_margin_start"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_classes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_exams_time">
+
+        <TextView
+            android:id="@+id/classes_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Уроки"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/classes_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6 уроков сегодня"
+            android:textColor="@color/gray"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/classes_title"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@null"
+            android:layout_marginTop="10dp"
+            style="@style/DarkGrayStyle"
+            app:layout_constraintTop_toBottomOf="@id/classes_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/classes_info_container"
+                android:layout_width="@null"
+                android:layout_height="match_parent"
+                style="@style/CropDarkGrayStyle"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/classes_open_in_container">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/classes_info_bow_container"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    style="@style/LightLightGrayStyle"
+                    android:layout_marginStart="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_bow"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/classes_info_class_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="История"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintTop_toTopOf="@id/classes_info_bow_container"
+                    app:layout_constraintStart_toEndOf="@id/classes_info_bow_container"
+                    app:layout_constraintBottom_toTopOf="@id/classes_info_class_time"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/classes_info_class_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/classes_info_class_title"
+                    app:layout_constraintStart_toStartOf="@id/classes_info_class_title"
+                    app:layout_constraintBottom_toBottomOf="@id/classes_info_bow_container">
+                    <ImageView
+                        android:id="@+id/classes_info_class_time_image"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/ic_clock_grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                    <TextView
+                        android:id="@+id/classes_info_class_time_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8:00 - 8:45"
+                        android:textSize="11sp"
+                        android:textColor="@color/gray"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/classes_info_class_time_image"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/classes_open_in_container"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                style="@style/CropCyanStyle"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/classes_open_in_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:rotation="90"
+                    android:text="Открыть в"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/classes_open_in_camera_image"/>
+
+                <ImageView
+                    android:id="@+id/classes_open_in_camera_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_camera"
+                    android:rotation="90"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/classes_open_in_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--endregion-->
+
+    <!--region Домашняя работа (Homework)-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homework_container"
+        android:layout_width="@null"
+        android:layout_height="@null"
+        android:layout_marginStart="@dimen/classes_container_margin_start"
+        android:layout_marginEnd="@dimen/classes_container_margin_start"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_homework"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_classes">
+
+        <TextView
+            android:id="@+id/homework_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Домашняя работа"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homework_content"
+            android:layout_width="@null"
+            android:layout_height="@null"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@id/homework_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--endregion-->
+
+    <!--region Footter -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/footer_classes_container"
+        android:layout_width="@null"
+        android:layout_height="@null"
+        android:layout_marginStart="@dimen/footer_container_margin_start"
+        android:layout_marginEnd="@dimen/footer_container_margin_end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_homework">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/footer_home_container"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
+            style="@style/DarkGreenStyle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/footer_home_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dice_four_green"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                android:id="@+id/footer_home_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Дом"
+                android:textColor="@color/green"
+                android:layout_marginStart="7dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/footer_home_image"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/footer_classes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_edit_calendar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/footer_home_container"
+            app:layout_constraintEnd_toStartOf="@id/footer_list_button"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/footer_list_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_list"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/footer_classes_button"
+            app:layout_constraintEnd_toStartOf="@id/footer_star_button"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/footer_star_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/footer_list_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--endregion-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
