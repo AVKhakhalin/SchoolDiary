@@ -15,12 +15,8 @@
                         android:color="@color/dark_gray" />
                     <gradient
                         android:useLevel="true"
+                        android:startColor="@color/dark_gray"
                         android:endColor="@color/dark_gray"/>
-                    <padding
-                        android:left="@null"
-                        android:top="@null"
-                        android:right="@null"
-                        android:bottom="@null" />
                     <size
                         android:width="60dp"
                         android:height="30dp" />

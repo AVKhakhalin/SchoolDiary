@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/DarkGrayStyle">
 
     <View
         android:id="@+id/bottom_fragment_divider"
-        android:layout_width="2dp"
-        android:layout_height="@null"
+        android:layout_width="@dimen/bottom_fragment_divider_width"
+        android:layout_height="@dimen/zero_dimen"
         android:background="@color/dark_green"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/circle_green_blue_container"
@@ -19,16 +20,16 @@
     <!--region Верхний круг -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/circle_green_blue_container"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/circle_green_blue_container_width"
+        android:layout_height="@dimen/circle_green_blue_container_height"
         style="@style/GreenBlueStyle"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/circle_green_blue_container_margin_start"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
     <ImageView
         android:id="@+id/circle_white_image"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="@dimen/circle_white_image_width"
+        android:layout_height="@dimen/circle_white_image_height"
         android:src="@drawable/ic_baseline_circle_white"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="@id/circle_green_blue_container"
@@ -41,20 +42,20 @@
         android:id="@+id/class_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="8:00 - 8:45"
+        android:text="@string/class_time_text"
         android:textColor="@color/white"
-        android:textSize="14sp"
-        android:layout_marginStart="15dp"
+        android:textSize="@dimen/class_time_text_size"
+        android:layout_marginStart="@dimen/class_time_margin_start"
         app:layout_constraintTop_toTopOf="@id/circle_green_blue_container"
         app:layout_constraintStart_toEndOf="@id/circle_green_blue_container"
         app:layout_constraintBottom_toBottomOf="@id/circle_green_blue_container" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/classes_info_container"
-        android:layout_width="@null"
-        android:layout_height="@null"
+        android:layout_width="@dimen/zero_dimen"
+        android:layout_height="@dimen/zero_dimen"
         style="@style/CropDarkGrayStyle"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/classes_info_container_margin_top"
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/class_time"
         app:layout_constraintStart_toStartOf="@id/class_time"
@@ -63,10 +64,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/classes_info_bow_container"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/classes_info_bow_container_width"
+            android:layout_height="@dimen/classes_info_bow_container_height"
             style="@style/LightLightGrayStyle"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="@dimen/classes_info_bow_container_margin_start"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -85,10 +86,10 @@
             android:id="@+id/classes_info_class_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="История"
+            android:text="@string/classes_info_class_title_text"
             android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_marginStart="20dp"
+            android:textSize="@dimen/classes_info_class_title_text_size"
+            android:layout_marginStart="@dimen/classes_info_class_title_margin_start"
             app:layout_constraintTop_toTopOf="@id/classes_info_bow_container"
             app:layout_constraintStart_toEndOf="@id/classes_info_bow_container"
             app:layout_constraintBottom_toTopOf="@id/classes_info_teacher_name"/>
@@ -97,20 +98,20 @@
             android:id="@+id/classes_info_teacher_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Учитель: Карамзин Николай"
+            android:text="@string/classes_info_teacher_name_text"
             android:textColor="@color/white"
-            android:textSize="10sp"
-            android:layout_marginTop="5dp"
+            android:textSize="@dimen/classes_info_teacher_name_text_size"
+            android:layout_marginTop="@dimen/classes_info_teacher_name_margin_top"
             app:layout_constraintTop_toBottomOf="@id/classes_info_class_title"
             app:layout_constraintStart_toStartOf="@id/classes_info_class_title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/classes_open_in_container"
-        android:layout_width="50dp"
+        android:layout_width="@dimen/classes_open_in_container_width"
         android:layout_height="wrap_content"
         style="@style/CropCyanStyle"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="@dimen/classes_open_in_container_margin_end"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@id/classes_info_container"
         app:layout_constraintEnd_toEndOf="parent">
@@ -120,14 +121,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:rotation="90"
-            android:text="Открыть в"
-            android:textSize="10sp"
+            android:text="@string/classes_open_in_title_text"
+            android:textSize="@dimen/classes_open_in_title_text_size"
             android:textColor="@color/white"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/classes_open_in_title_margin_top"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/classes_open_in_camera_image"/>
+            app:layout_constraintBottom_toTopOf="@id/classes_open_in_camera_image"
+            tools:ignore="SmallSp" />
 
         <ImageView
             android:id="@+id/classes_open_in_camera_image"
@@ -135,8 +137,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_camera"
             android:rotation="90"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="@dimen/classes_open_in_camera_image_margin_top"
+            android:layout_marginBottom="@dimen/classes_open_in_camera_image_margin_bottom"
             app:layout_constraintTop_toBottomOf="@id/classes_open_in_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -145,8 +147,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/classes_open_in_container_gray"
-        android:layout_width="50dp"
-        android:layout_height="@null"
+        android:layout_width="@dimen/classes_open_in_container_gray_width"
+        android:layout_height="@dimen/zero_dimen"
         android:rotation="180"
         style="@style/CropDarkGrayStyle"
         android:visibility="invisible"
@@ -157,7 +159,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/additional_classes_container"
-        android:layout_width="@null"
+        android:layout_width="@dimen/zero_dimen"
         android:layout_height="wrap_content"
         style="@style/GreenBlueStyle"
         android:visibility="visible"
@@ -167,18 +169,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/additional_classes_info_container"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/additional_classes_info_container_width"
+            android:layout_height="@dimen/additional_classes_info_container_height"
             style="@style/LightGreenStyle"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/additional_classes_info_container_margin_start"
+            android:layout_marginTop="@dimen/additional_classes_info_container_margin_top"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/additional_classes_info_image"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="@dimen/additional_classes_info_image_width"
+                android:layout_height="@dimen/additional_classes_info_image_height"
                 android:src="@drawable/ic_ball"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -190,10 +192,10 @@
             android:id="@+id/additional_classes_info_class_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Физкультура"
+            android:text="@string/additional_classes_info_class_title_text"
             android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_marginStart="20dp"
+            android:textSize="@dimen/additional_classes_info_class_title_text_size"
+            android:layout_marginStart="@dimen/additional_classes_info_class_title_margin_start"
             app:layout_constraintTop_toTopOf="@id/additional_classes_info_container"
             app:layout_constraintStart_toEndOf="@id/additional_classes_info_container"
             app:layout_constraintBottom_toTopOf="@id/additional_classes_info_teacher_name"/>
@@ -202,21 +204,21 @@
             android:id="@+id/additional_classes_info_teacher_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Учитель: Иосифович Николай"
+            android:text="@string/additional_classes_info_teacher_name_text"
             android:textColor="@color/white"
-            android:textSize="10sp"
-            android:layout_marginTop="5dp"
+            android:textSize="@dimen/additional_classes_info_teacher_name_text_size"
+            android:layout_marginTop="@dimen/additional_classes_info_teacher_name_margin_top"
             app:layout_constraintTop_toBottomOf="@id/additional_classes_info_class_title"
             app:layout_constraintStart_toStartOf="@id/additional_classes_info_class_title" />
 
         <TextView
             android:id="@+id/additional_classes_info_description"
-            android:layout_width="@null"
+            android:layout_width="@dimen/zero_dimen"
             android:layout_height="wrap_content"
-            android:text="Интенсивная подготовка к Московским физкультурным соревнованиям."
+            android:text="@string/additional_classes_info_description_text"
             android:textColor="@color/white"
-            android:textSize="10sp"
-            android:layout_marginTop="5dp"
+            android:textSize="@dimen/additional_classes_info_description_text_size"
+            android:layout_marginTop="@dimen/additional_classes_info_description_margin_top"
             app:layout_constraintTop_toBottomOf="@id/additional_classes_info_container"
             app:layout_constraintStart_toStartOf="@id/additional_classes_info_container"
             app:layout_constraintEnd_toEndOf="@id/additional_classes_container"/>
@@ -224,17 +226,17 @@
         <!--region Мой логтип 1-->
         <ImageView
             android:id="@+id/header_face_one_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/header_face_one_button_width"
+            android:layout_height="@dimen/header_face_one_button_height"
             android:src="@drawable/ic_baseline_circle_light_green"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/header_face_one_button_margin_top"
             app:layout_constraintTop_toBottomOf="@id/additional_classes_info_description"
             app:layout_constraintStart_toStartOf="@id/additional_classes_info_description" />
 
         <ImageView
             android:id="@+id/header_face_one_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/header_face_one_image_width"
+            android:layout_height="@dimen/header_face_one_image_height"
             android:src="@drawable/ic_baseline_face_one"
             app:layout_constraintTop_toTopOf="@id/header_face_one_button"
             app:layout_constraintStart_toStartOf="@id/header_face_one_button"
@@ -245,17 +247,17 @@
         <!--region Мой логтип 2-->
         <ImageView
             android:id="@+id/header_face_two_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/header_face_two_button_width"
+            android:layout_height="@dimen/header_face_two_button_height"
             android:src="@drawable/ic_baseline_circle_light_green"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="@dimen/header_face_two_button_margin_start"
             app:layout_constraintTop_toTopOf="@id/header_face_one_button"
             app:layout_constraintStart_toStartOf="@id/header_face_one_button" />
 
         <ImageView
             android:id="@+id/header_face_two_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/header_face_two_image_width"
+            android:layout_height="@dimen/header_face_two_image_height"
             android:src="@drawable/ic_baseline_face_four"
             app:layout_constraintTop_toTopOf="@id/header_face_two_button"
             app:layout_constraintStart_toStartOf="@id/header_face_two_button"
@@ -266,17 +268,17 @@
         <!--region Мой логтип 3-->
         <ImageView
             android:id="@+id/header_face_three_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/header_face_three_button_width"
+            android:layout_height="@dimen/header_face_three_button_height"
             android:src="@drawable/ic_baseline_circle_light_green"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="@dimen/header_face_three_button_margin_start"
             app:layout_constraintTop_toTopOf="@id/header_face_two_button"
             app:layout_constraintStart_toStartOf="@id/header_face_two_button" />
 
         <ImageView
             android:id="@+id/header_face_three_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/header_face_three_image_width"
+            android:layout_height="@dimen/header_face_three_image_height"
             android:src="@drawable/ic_baseline_face_fifth"
             app:layout_constraintTop_toTopOf="@id/header_face_three_button"
             app:layout_constraintStart_toStartOf="@id/header_face_three_button"
@@ -285,8 +287,9 @@
         <!--endregion-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="1dp"
-            android:layout_height="20dp"
+            android:id="@+id/bottom_view"
+            android:layout_width="@dimen/bottom_view_width"
+            android:layout_height="@dimen/bottom_view_height"
             app:layout_constraintTop_toBottomOf="@id/header_face_one_button"
             app:layout_constraintStart_toStartOf="@id/header_face_one_button"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
