@@ -46,7 +46,7 @@
       android:fillColor="@color/red"
       android:pathData="M14,7.5m-0.5,0a0.5,0.5 0,1 1,1 0a0.5,0.5 0,1 1,-1 0"/>
   <path
-      android:fillColor="@color/material_dynamic_neutral0"
+      android:fillColor="@color/black"
       android:pathData="M16,7.5m-0.5,0a0.5,0.5 0,1 1,1 0a0.5,0.5 0,1 1,-1 0"/>
   <path
       android:fillColor="@color/blue"
@@ -67,7 +67,7 @@
       android:fillColor="@color/green"
       android:pathData="M13,8.5m-0.5,0a0.5,0.5 0,1 1,1 0a0.5,0.5 0,1 1,-1 0"/>
   <path
-      android:fillColor="@color/material_dynamic_neutral0"
+      android:fillColor="@color/white"
       android:pathData="M15,8.5m-0.5,0a0.5,0.5 0,1 1,1 0a0.5,0.5 0,1 1,-1 0"/>
   <path
       android:fillColor="@color/blue"
