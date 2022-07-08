@@ -14,12 +14,8 @@
                         android:color="@color/light_green" />
                     <gradient
                         android:useLevel="true"
+                        android:startColor="@color/light_green"
                         android:endColor="@color/light_green"/>
-                    <padding
-                        android:left="@null"
-                        android:top="@null"
-                        android:right="@null"
-                        android:bottom="@null" />
                     <size
                         android:width="60dp"
                         android:height="30dp" />

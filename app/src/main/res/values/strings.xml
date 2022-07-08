@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">SchoolDiary</string>
+    <string name="class_time_text">8:00 - 8:45</string>
+    <string name="classes_info_class_title_text">История</string>
+    <string name="classes_info_teacher_name_text">Учитель: Карамзин Николай</string>
+    <string name="classes_open_in_title_text">Открыть в</string>
+    <string name="additional_classes_info_class_title_text">Физкультура</string>
+    <string name="additional_classes_info_teacher_name_text">Учитель: Иосифович Николай</string>
+    <string name="additional_classes_info_description_text">Интенсивная подготовка к Московским физкультурным соревнованиям.</string>
+    <string name="header_classes_title_text">Занятия</string>
+    <string name="header_classes_today_details_text">Сегодня, 1 Июня</string>
+    <string name="footer_classes_description_text">Занятия</string>
+    <string name="header_title_text">Привет, Владимир!</string>
+    <string name="exams_time_title_text">Вы готовы к экзамену?</string>
+    <string name="exams_time_days_decade_text">0</string>
+    <string name="exams_time_days_units_text">9</string>
+    <string name="exams_time_hours_decade_text">2</string>
+    <string name="exams_time_hours_units_text">3</string>
+    <string name="exams_time_minutes_decade_text">5</string>
+    <string name="exams_time_minutes_units_text">9</string>
+    <string name="exams_time_days_title_text">Дни</string>
+    <string name="exams_time_hours_title_text">Часы</string>
+    <string name="exams_time_minutes_title_text">Минуты</string>
+    <string name="classes_title_text">Уроки</string>
+    <string name="classes_number_text">6 уроков сегодня</string>
+    <string name="classes_info_class_time_details_text">8:00 - 8:45</string>
+    <string name="homework_title_text">Домашняя работа</string>
+    <string name="footer_home_description_text">Дом</string>
+    <string name="homework_item_title_text">Литература</string>
+    <string name="homework_item_days_left_text_text">2 дня осталось</string>
+    <string name="homework_item_details_text">Прочитать сцены 1.1-1.12 из произведения Мастер и маргарита</string>
 </resources>

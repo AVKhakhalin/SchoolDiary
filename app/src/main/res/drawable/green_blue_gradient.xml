@@ -18,11 +18,6 @@
                         android:centerColor="@color/green"
                         android:startColor="@color/green"
                         android:type="linear"/>
-                    <padding
-                        android:left="@null"
-                        android:top="@null"
-                        android:right="@null"
-                        android:bottom="@null" />
                     <size
                         android:width="60dp"
                         android:height="30dp" />

@@ -12,12 +12,8 @@
                         android:topRightRadius="20dp" />
                     <gradient
                         android:useLevel="true"
-                        android:endColor="@color/blue"/>
-                    <padding
-                        android:left="@null"
-                        android:top="@null"
-                        android:right="@null"
-                        android:bottom="@null" />
+                        android:startColor="@color/blue"
+                        android:endColor="@color/blue" />
                     <size
                         android:width="60dp"
                         android:height="30dp" />
