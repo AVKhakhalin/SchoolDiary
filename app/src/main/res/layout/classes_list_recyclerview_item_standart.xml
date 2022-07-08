@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/DarkGrayStyle">
+
+    <View
+        android:id="@+id/bottom_fragment_divider"
+        android:layout_width="2dp"
+        android:layout_height="@null"
+        android:background="@color/dark_green"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/circle_green_blue_container"
+        app:layout_constraintEnd_toEndOf="@id/circle_green_blue_container"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!--region Верхний круг -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/circle_green_blue_container"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        style="@style/GreenBlueStyle"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <ImageView
+        android:id="@+id/circle_white_image"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_baseline_circle_white"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/circle_green_blue_container"
+        app:layout_constraintTop_toTopOf="@id/circle_green_blue_container"
+        app:layout_constraintEnd_toEndOf="@id/circle_green_blue_container"
+        app:layout_constraintBottom_toBottomOf="@id/circle_green_blue_container"/>
+    <!--endregion-->
+
+    <TextView
+        android:id="@+id/class_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8:00 - 8:45"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintTop_toTopOf="@id/circle_green_blue_container"
+        app:layout_constraintStart_toEndOf="@id/circle_green_blue_container"
+        app:layout_constraintBottom_toBottomOf="@id/circle_green_blue_container" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/classes_info_container"
+        android:layout_width="@null"
+        android:layout_height="@null"
+        style="@style/CropDarkGrayStyle"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/class_time"
+        app:layout_constraintStart_toStartOf="@id/class_time"
+        app:layout_constraintEnd_toStartOf="@id/classes_open_in_container"
+        app:layout_constraintBottom_toBottomOf="@id/classes_open_in_container">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/classes_info_bow_container"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            style="@style/LightLightGrayStyle"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_bow"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/classes_info_class_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="История"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="@id/classes_info_bow_container"
+            app:layout_constraintStart_toEndOf="@id/classes_info_bow_container"
+            app:layout_constraintBottom_toTopOf="@id/classes_info_teacher_name"/>
+
+        <TextView
+            android:id="@+id/classes_info_teacher_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Учитель: Карамзин Николай"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/classes_info_class_title"
+            app:layout_constraintStart_toStartOf="@id/classes_info_class_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/classes_open_in_container"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        style="@style/CropCyanStyle"
+        android:layout_marginEnd="20dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@id/classes_info_container"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/classes_open_in_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rotation="90"
+            android:text="Открыть в"
+            android:textSize="10sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/classes_open_in_camera_image"/>
+
+        <ImageView
+            android:id="@+id/classes_open_in_camera_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_camera"
+            android:rotation="90"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintTop_toBottomOf="@id/classes_open_in_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/classes_open_in_container_gray"
+        android:layout_width="50dp"
+        android:layout_height="@null"
+        android:rotation="180"
+        style="@style/CropDarkGrayStyle"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="@id/classes_info_container"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
