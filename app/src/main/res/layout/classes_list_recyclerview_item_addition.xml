@@ -20,8 +20,8 @@
     <!--region Верхний круг -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/circle_green_blue_container"
-        android:layout_width="@dimen/circle_green_blue_container_width"
-        android:layout_height="@dimen/circle_green_blue_container_height"
+        android:layout_width="@dimen/circle_green_blue_container_large_width"
+        android:layout_height="@dimen/circle_green_blue_container_large_height"
         style="@style/GreenBlueStyle"
         android:layout_marginStart="@dimen/circle_green_blue_container_margin_start"
         app:layout_constraintTop_toTopOf="parent"

@@ -10,8 +10,8 @@
     <dimen name="header_container_margin_end">20dp</dimen>
     <dimen name="classes_container_margin_start">20dp</dimen>
     <dimen name="bottom_fragment_divider_width">2dp</dimen>
-    <dimen name="circle_green_blue_container_width">30dp</dimen>
-    <dimen name="circle_green_blue_container_height">30dp</dimen>
+    <dimen name="circle_green_blue_container_large_width">30dp</dimen>
+    <dimen name="circle_green_blue_container_large_height">30dp</dimen>
     <dimen name="circle_green_blue_container_margin_start">30dp</dimen>
     <dimen name="circle_white_image_width">15dp</dimen>
     <dimen name="circle_white_image_height">15dp</dimen>
@@ -167,4 +167,6 @@
     <dimen name="homework_item_face_two_image_margin_start">20dp</dimen>
     <dimen name="zero_dimen">0dp</dimen>
     <dimen name="footer_home_container_button_margin_start">20dp</dimen>
+    <dimen name="circle_green_blue_container_small_width">10dp</dimen>
+    <dimen name="circle_green_blue_container_small_height">10dp</dimen>
 </resources>

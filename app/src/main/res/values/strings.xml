@@ -7,9 +7,9 @@
     <string name="additional_classes_info_class_title_text">Физкультура</string>
     <string name="additional_classes_info_teacher_name_text">Учитель: Иосифович Николай</string>
     <string name="additional_classes_info_description_text">Интенсивная подготовка к Московским физкультурным соревнованиям.</string>
-    <string name="header_classes_title_text">Занятия</string>
+    <string name="header_classes_title_text">Уроки</string>
     <string name="header_classes_today_details_text">Сегодня, 1 Июня</string>
-    <string name="footer_classes_description_text">Занятия</string>
+    <string name="footer_classes_description_text">Уроки</string>
     <string name="header_title_text">Привет, Владимир!</string>
     <string name="exams_time_title_text">Вы готовы к экзамену?</string>
     <string name="exams_time_days_decade_text">0</string>
