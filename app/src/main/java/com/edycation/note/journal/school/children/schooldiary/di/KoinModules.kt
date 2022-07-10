@@ -7,6 +7,7 @@ import com.edycation.note.journal.school.children.schooldiary.utils.CICERONE_NAM
 import com.edycation.note.journal.school.children.schooldiary.utils.CLASSES_FRAGMENT_SCOPE
 import com.edycation.note.journal.school.children.schooldiary.utils.HOME_FRAGMENT_SCOPE
 import com.edycation.note.journal.school.children.schooldiary.utils.MAIN_ACTIVITY_SCOPE
+import com.edycation.note.journal.school.children.schooldiary.utils.resources.ResourcesProvider
 import com.edycation.note.journal.school.children.schooldiary.utils.resources.ResourcesProviderImpl
 import com.edycation.note.journal.school.children.schooldiary.view.activity.MainViewModel
 import com.edycation.note.journal.school.children.schooldiary.view.fragments.classes.ClassesFragmentInteractor
@@ -35,7 +36,7 @@ val application = module {
 
     // Вспомогательные классы:
     // Получение доступа к ресурсам
-    single<ResourcesProviderImpl> { ResourcesProviderImpl(androidContext()) }
+    single<ResourcesProvider> { ResourcesProviderImpl(androidContext()) }
 }
 
 val screens = module {
