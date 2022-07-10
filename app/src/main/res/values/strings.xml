@@ -29,4 +29,67 @@
     <string name="homework_item_title_text">Литература</string>
     <string name="homework_item_days_left_text_text">2 дня осталось</string>
     <string name="homework_item_details_text">Прочитать сцены 1.1-1.12 из произведения Мастер и маргарита</string>
+
+    <!--region Classes names -->
+    <string name="classes_hystory">История</string>
+    <string name="classes_physical_education">Физкультура</string>
+    <string name="classes_literature">Литература</string>
+    <string name="classes_physics">Физика</string>
+    <string name="classes_mathematics">Математика</string>
+    <string name="classes_biology">Биология</string>
+    <string name="classes_russia_language">Русский язык</string>
+    <string name="classes_algebra">Алгебра</string>
+    <string name="classes_geography">География</string>
+    <string name="classes_music">Музыка</string>
+    <string name="classes_geometry">Геометрия</string>
+    <string name="classes_astronomy">Астрономия</string>
+    <string name="classes_english_language">Английский язык</string>
+    <string name="classes_history_of_russia">История России</string>
+    <string name="classes_informatics">Информатика</string>
+    <string name="classes_general_history">Общая история</string>
+    <string name="classes_french_language">Французский язык</string>
+    <string name="classes_german_language">Немецкий язык</string>
+    <!--endregion-->
+
+    <!--region Classes teacher names -->
+    <string name="classes_teacher_name_hystory">Гумилёв Лев</string>
+    <string name="classes_teacher_name_physical_education">Поддубный Иван</string>
+    <string name="classes_teacher_name_literature">Пушкин Александр</string>
+    <string name="classes_teacher_name_physics">Исаак Ньютон</string>
+    <string name="classes_teacher_name_mathematics">Са́мосский Пифаго́р</string>
+    <string name="classes_teacher_name_biology">Вавилов Николай</string>
+    <string name="classes_teacher_name_russia_language">Ожегов Сергей</string>
+    <string name="classes_teacher_name_algebra">Лейбниц Готфрид</string>
+    <string name="classes_teacher_name_geography">Христофор Колумб</string>
+    <string name="classes_teacher_name_music">Шопен Фридерик</string>
+    <string name="classes_teacher_name_geometry">Милетский Фалес</string>
+    <string name="classes_teacher_name_astronomy">Коперник Николай</string>
+    <string name="classes_teacher_name_english_language">Кристи Агата</string>
+    <string name="classes_teacher_name_history_of_russia">Крамзин Николай</string>
+    <string name="classes_teacher_name_informatics">Маккарти Джон</string>
+    <string name="classes_teacher_name_general_history">Сыма Цянь</string>
+    <string name="classes_teacher_name_french_language">Капет Гуго</string>
+    <string name="classes_teacher_name_german_language">Гёте Вольфганг</string>
+    <!--endregion-->
+
+    <!--region Classes teacher names -->
+    <string name="homework_description_hystory">Выучить даты образования текущих стран мира</string>
+    <string name="homework_description_physical_education">Научитья подтягиваться 7 раз</string>
+    <string name="homework_description_literature">Выучить произведение "Евгений Онегин"</string>
+    <string name="homework_description_physics">Изучить законы Ньютона</string>
+    <string name="homework_description_mathematics">Выучить доказательство теоремы Пифагора</string>
+    <string name="homework_description_biology">Изучить органеллы клетки</string>
+    <string name="homework_description_russia_language">Изучить правописание гласных, обусловленное их произношением</string>
+    <string name="homework_description_algebra">Научиться решать квадратичное уравнение</string>
+    <string name="homework_description_geography">Изучить расположение на карте мыса Горн</string>
+    <string name="homework_description_music">Выучить "Лунную сонату" Л.В.Бетховена</string>
+    <string name="homework_description_geometry">Выучить первый признак равенства треугольников</string>
+    <string name="homework_description_astronomy">Выучить названия и расстояния от Солнца планет в солнечной системе</string>
+    <string name="homework_description_english_language">Выучить неправильные глаголы</string>
+    <string name="homework_description_history_of_russia">Выучить хронологию царей древней Руси</string>
+    <string name="homework_description_informatics">Разобраться в видах памяти компьютера</string>
+    <string name="homework_description_general_history">Изучить реформы в Польше в 80-х годах, получивших называние название: "Шоковая терапия"»"</string>
+    <string name="homework_description_french_language">Изучить случаи, в которых в вопросительном предложении встречается прямой порядок слов</string>
+    <string name="homework_description_german_language">Изучить составные существительные</string>
+    <!--endregion-->
 </resources>

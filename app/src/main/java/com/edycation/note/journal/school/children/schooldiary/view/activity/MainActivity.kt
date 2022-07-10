@@ -1,16 +1,21 @@
 package com.edycation.note.journal.school.children.schooldiary.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.edycation.note.journal.school.children.schooldiary.R
 import com.edycation.note.journal.school.children.schooldiary.databinding.ActivityMainBinding
 import com.edycation.note.journal.school.children.schooldiary.navigation.BackButtonListener
+import com.edycation.note.journal.school.children.schooldiary.repository.settings.Settings
 import com.edycation.note.journal.school.children.schooldiary.utils.MAIN_ACTIVITY_SCOPE
+import com.edycation.note.journal.school.children.schooldiary.utils.getClassesStartTime
+import com.edycation.note.journal.school.children.schooldiary.utils.initiateClasses
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.java.KoinJavaComponent.getKoin
+import java.util.*
 
 class MainActivity: AppCompatActivity() {
     /** Исходные данные */ //region
@@ -25,6 +30,8 @@ class MainActivity: AppCompatActivity() {
     // Навигация
     private val navigator = AppNavigator(this@MainActivity, R.id.fragments_container)
     private val navigatorHolder: NavigatorHolder = getKoin().get()
+    // Текущий день
+    private val settings: Settings = getKoin().get()
     //endregion
 
     override fun onDestroy() {
@@ -35,6 +42,10 @@ class MainActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Установка текущей даты
+        settings.currentData.time = Date()
+        // Установка текущего расписания
+        settings.classes.initiateClasses()
         // Подключение Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         // Инициализация ViewModel
