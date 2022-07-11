@@ -42,3 +42,9 @@ enum class StudyDayOfWeek {
     SATURDAY,
     SUNDAY
 }
+
+// Настройки Paging 3.0
+const val INITIAL_PAGE_NUMBER: Int = 1
+const val MAX_PAGE_SIZE: Int = 3
+const val MAX_ELEMENTS_ON_PAGE: Int = 2
+const val INFINITY_KOEFFICIENT: Int = 10000
