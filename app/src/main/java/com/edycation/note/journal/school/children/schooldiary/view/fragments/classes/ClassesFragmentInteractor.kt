@@ -13,8 +13,8 @@ class ClassesFragmentInteractor(
     private val settings: Settings = getKoin().get()
     //endregion
 
-    override suspend fun getData(): AppState {
-        val appState: AppState = AppState.Success("")
+    override suspend fun getData(dayIndex: Int): AppState {
+        val appState: AppState = AppState.Success(settings.classes[dayIndex])
         return appState
     }
 }

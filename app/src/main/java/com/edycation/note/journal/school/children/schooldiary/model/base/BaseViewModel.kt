@@ -35,7 +35,7 @@ abstract class BaseViewModel<T: AppState>(
         viewModelCoroutineScope.coroutineContext.cancelChildren()
     }
 
-    abstract fun getData()
+    abstract fun getData(dayIndex: Int)
 
     abstract fun handleError(error: Throwable)
 }
