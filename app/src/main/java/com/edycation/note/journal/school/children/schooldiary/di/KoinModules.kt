@@ -50,9 +50,7 @@ val screens = module {
     // Scope для фрагмента с уроками
     scope(named(CLASSES_FRAGMENT_SCOPE)) {
         scoped {
-            ClassesFragmentInteractor(
-                ResourcesProviderImpl(get())
-            )
+            ClassesFragmentInteractor()
         }
         viewModel {
             ClassesFragmentViewModel(getScope(CLASSES_FRAGMENT_SCOPE).get())
@@ -62,9 +60,7 @@ val screens = module {
     // Scope для фрагмента с домашними заданиями
     scope(named(HOME_FRAGMENT_SCOPE)) {
         scoped {
-            HomeFragmentInteractor(
-                ResourcesProviderImpl(get())
-            )
+            HomeFragmentInteractor()
         }
         viewModel {
             HomeFragmentViewModel(getScope(HOME_FRAGMENT_SCOPE).get())

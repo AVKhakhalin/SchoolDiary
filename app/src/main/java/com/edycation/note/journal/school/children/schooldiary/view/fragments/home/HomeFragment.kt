@@ -74,42 +74,38 @@ class HomeFragment:
         val _viewModel: HomeFragmentViewModel by showHomeFragmentScope.inject()
         viewModel = _viewModel
         // Подписка на ViewModel
-//        this.viewModel.subscribe().observe(viewLifecycleOwner) { renderData(it) }
+        this.viewModel.subscribe().observe(viewLifecycleOwner) { renderData(it) }
         // Загрузка данных
-//        viewModel.getData(settings.currentData.get(Calendar.DAY_OF_WEEK).convertDayToIndex())
+        viewModel.getData(settings.currentData.get(Calendar.DAY_OF_WEEK).convertDayToIndex())
+    }
 
-        val recyclerView: RecyclerView = binding.homeworkContent
-        recyclerView.layoutManager = LinearLayoutManager(
-            requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        val homeworkListPageAdapter: HomeworkListPageAdapter = HomeworkListPageAdapter(requireContext())
-        recyclerView.adapter = homeworkListPageAdapter
+    private fun renderData(appState: AppState) {
+        when (appState) {
+            is AppState.Success -> {
+                appState?.let {
+                    // Запуск получения данных для Paging 3.0 и их отображение
+                    val recyclerView: RecyclerView = binding.homeworkContent
+                    recyclerView.layoutManager = LinearLayoutManager(
+                        requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    val homeworkListPageAdapter: HomeworkListPageAdapter =
+                        HomeworkListPageAdapter(requireContext())
+                    recyclerView.adapter = homeworkListPageAdapter
 
-        lifecycleScope.launch {
-            viewModel.lession.collectLatest { pagedData ->
-                homeworkListPageAdapter.submitData(pagedData)
+                    lifecycleScope.launch {
+                        viewModel.lession.collectLatest { pagedData ->
+                            homeworkListPageAdapter.submitData(pagedData)
+                        }
+                    }
+                }
+            }
+            is AppState.Loading -> {
+                // Изменение внешнего вида фрагмента
+            }
+            is AppState.Error -> {
+                Toast.makeText(requireContext(), appState.error.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
-
-//    private fun renderData(appState: AppState) {
-//        when (appState) {
-//            is AppState.Success -> {
-//                appState.lessionsList?.let{ lessionsList ->
-//                    // Установка списка домашних заданий
-//                    val recyclerView: RecyclerView = binding.homeworkContent
-//                    recyclerView.layoutManager = LinearLayoutManager(
-//                        requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//                    recyclerView.adapter = HomeworkListRecyclerAdapter(lessionsList)
-//                }
-//            }
-//            is AppState.Loading -> {
-//                // Изменение внешнего вида фрагмента
-//            }
-//            is AppState.Error -> {
-//                Toast.makeText(requireContext(), appState.error.message, Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
 
     // Инициализация навигационных кнопок
     private fun initNavigaionsButtons() {

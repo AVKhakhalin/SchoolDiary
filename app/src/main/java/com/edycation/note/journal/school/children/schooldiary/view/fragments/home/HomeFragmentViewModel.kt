@@ -1,19 +1,17 @@
 package com.edycation.note.journal.school.children.schooldiary.view.fragments.home
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.*
-import com.bumptech.glide.disklrucache.DiskLruCache
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.edycation.note.journal.school.children.schooldiary.model.base.BaseViewModel
 import com.edycation.note.journal.school.children.schooldiary.model.data.AppState
-import com.edycation.note.journal.school.children.schooldiary.model.data.Lession
 import com.edycation.note.journal.school.children.schooldiary.repository.settings.Settings
 import com.edycation.note.journal.school.children.schooldiary.utils.MAX_PAGE_SIZE
 import com.edycation.note.journal.school.children.schooldiary.utils.convertDayToIndex
 import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListPageSource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.java.KoinJavaComponent
