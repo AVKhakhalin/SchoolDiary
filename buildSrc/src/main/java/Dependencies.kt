@@ -75,6 +75,8 @@ object Versions {
     const val cicerony = "6.6"
     // Lifecycle
     const val lifecycle = "2.2.0"
+    // Paging
+    const val paging = "3.0.0"
 }
 
 object AndroidX {
@@ -192,4 +194,8 @@ object Lifecycle {
     const val runtimektx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     const val process = "androidx.lifecycle:lifecycle-process:${Versions.lifecycle}"
     const val java8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle}"
+}
+
+object Paging {
+    const val runtime = "androidx.paging:paging-runtime:${Versions.paging}"
 }

@@ -126,4 +126,6 @@ dependencies {
     // Koin for Tests
     testImplementation Koin.testsandroidx
     testImplementation Koin.testsio
+    // Paging 3.0
+    implementation Paging.runtime
 }

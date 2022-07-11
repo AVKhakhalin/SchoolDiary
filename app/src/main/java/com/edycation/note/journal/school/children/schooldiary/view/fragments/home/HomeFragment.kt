@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edycation.note.journal.school.children.schooldiary.databinding.FragmentHomeBinding
@@ -15,7 +16,12 @@ import com.edycation.note.journal.school.children.schooldiary.repository.setting
 import com.edycation.note.journal.school.children.schooldiary.utils.HOME_FRAGMENT_SCOPE
 import com.edycation.note.journal.school.children.schooldiary.utils.convertDayToIndex
 import com.edycation.note.journal.school.children.schooldiary.view.fragments.classes.ClassesFragmentViewModel
+import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListPageAdapter
 import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListRecyclerAdapter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.launch
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.java.KoinJavaComponent
@@ -68,30 +74,42 @@ class HomeFragment:
         val _viewModel: HomeFragmentViewModel by showHomeFragmentScope.inject()
         viewModel = _viewModel
         // Подписка на ViewModel
-        this.viewModel.subscribe().observe(viewLifecycleOwner) { renderData(it) }
+//        this.viewModel.subscribe().observe(viewLifecycleOwner) { renderData(it) }
         // Загрузка данных
-        viewModel.getData(settings.currentData.get(Calendar.DAY_OF_WEEK).convertDayToIndex())
-    }
+//        viewModel.getData(settings.currentData.get(Calendar.DAY_OF_WEEK).convertDayToIndex())
 
-    private fun renderData(appState: AppState) {
-        when (appState) {
-            is AppState.Success -> {
-                appState.lessionsList?.let{ lessionsList ->
-                    // Установка списка домашних заданий
-                    val recyclerView: RecyclerView = binding.homeworkContent
-                    recyclerView.layoutManager = LinearLayoutManager(
-                        requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                    recyclerView.adapter = HomeworkListRecyclerAdapter(lessionsList)
-                }
-            }
-            is AppState.Loading -> {
-                // Изменение внешнего вида фрагмента
-            }
-            is AppState.Error -> {
-                Toast.makeText(requireContext(), appState.error.message, Toast.LENGTH_SHORT).show()
+        val recyclerView: RecyclerView = binding.homeworkContent
+        recyclerView.layoutManager = LinearLayoutManager(
+            requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val homeworkListPageAdapter: HomeworkListPageAdapter = HomeworkListPageAdapter(requireContext())
+        recyclerView.adapter = homeworkListPageAdapter
+
+        lifecycleScope.launch {
+            viewModel.lession.collectLatest { pagedData ->
+                homeworkListPageAdapter.submitData(pagedData)
             }
         }
     }
+
+//    private fun renderData(appState: AppState) {
+//        when (appState) {
+//            is AppState.Success -> {
+//                appState.lessionsList?.let{ lessionsList ->
+//                    // Установка списка домашних заданий
+//                    val recyclerView: RecyclerView = binding.homeworkContent
+//                    recyclerView.layoutManager = LinearLayoutManager(
+//                        requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//                    recyclerView.adapter = HomeworkListRecyclerAdapter(lessionsList)
+//                }
+//            }
+//            is AppState.Loading -> {
+//                // Изменение внешнего вида фрагмента
+//            }
+//            is AppState.Error -> {
+//                Toast.makeText(requireContext(), appState.error.message, Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
 
     // Инициализация навигационных кнопок
     private fun initNavigaionsButtons() {
