@@ -15,18 +15,18 @@ class HomeFragmentViewModel(
     private val liveDataForViewToObserve: LiveData<AppState> = _mutableLiveData
     //endregion
 
-    override fun getData() {
+    override fun getData(dayIndex: Int) {
         // Выполнение поиска
         _mutableLiveData.value = AppState.Loading(null)
         cancelJob()
         viewModelCoroutineScope.launch {
-            startInteractor()
+            startInteractor(dayIndex)
         }
     }
 
-    private suspend fun startInteractor() =
+    private suspend fun startInteractor(dayIndex: Int) =
         withContext(Dispatchers.IO) {
-            _mutableLiveData.postValue(interactor.getData())
+            _mutableLiveData.postValue(interactor.getData(dayIndex))
         }
 
     override fun handleError(error: Throwable) {

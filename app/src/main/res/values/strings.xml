@@ -30,6 +30,13 @@
     <string name="homework_item_days_left_text_text">2 дня осталось</string>
     <string name="homework_item_details_text">Прочитать сцены 1.1-1.12 из произведения Мастер и маргарита</string>
 
+    <!--region Переменные для вывода количества дней до экзаменов -->
+    <string name="days_variation_one">день</string>
+    <string name="days_variation_two">дня</string>
+    <string name="days_variation_three">дней</string>
+    <string name="days_remain">осталось</string>
+    <!--endregion-->
+
     <!--region Classes names -->
     <string name="classes_hystory">История</string>
     <string name="classes_physical_education">Физкультура</string>

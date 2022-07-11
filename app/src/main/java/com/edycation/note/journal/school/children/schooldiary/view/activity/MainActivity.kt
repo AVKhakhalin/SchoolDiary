@@ -1,13 +1,16 @@
 package com.edycation.note.journal.school.children.schooldiary.view.activity
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.edycation.note.journal.school.children.schooldiary.R
 import com.edycation.note.journal.school.children.schooldiary.databinding.ActivityMainBinding
 import com.edycation.note.journal.school.children.schooldiary.navigation.BackButtonListener
 import com.edycation.note.journal.school.children.schooldiary.repository.settings.Settings
 import com.edycation.note.journal.school.children.schooldiary.utils.MAIN_ACTIVITY_SCOPE
+import com.edycation.note.journal.school.children.schooldiary.utils.StudyDayOfWeek
 import com.edycation.note.journal.school.children.schooldiary.utils.getClassesStartTime
 import com.edycation.note.journal.school.children.schooldiary.utils.initiateClasses
 import com.github.terrakok.cicerone.NavigatorHolder
@@ -15,7 +18,14 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.java.KoinJavaComponent.getKoin
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.Period
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class MainActivity: AppCompatActivity() {
     /** Исходные данные */ //region

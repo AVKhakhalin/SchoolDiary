@@ -8,10 +8,13 @@ import android.widget.Toast
 import com.edycation.note.journal.school.children.schooldiary.databinding.FragmentClassesBinding
 import com.edycation.note.journal.school.children.schooldiary.model.base.BaseFragment
 import com.edycation.note.journal.school.children.schooldiary.model.data.AppState
+import com.edycation.note.journal.school.children.schooldiary.repository.settings.Settings
 import com.edycation.note.journal.school.children.schooldiary.utils.CLASSES_FRAGMENT_SCOPE
+import com.edycation.note.journal.school.children.schooldiary.utils.convertDayToIndex
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.java.KoinJavaComponent.getKoin
+import java.util.*
 
 class ClassesFragment:
     BaseFragment<FragmentClassesBinding>(FragmentClassesBinding::inflate) {
@@ -22,6 +25,8 @@ class ClassesFragment:
     private lateinit var showClassesFragmentScope: Scope
     // Навигационные кнопки
     private lateinit var homeButton: ImageView
+    // Класс с настройками для получения текущей даты
+    private val settings: Settings = getKoin().get()
     // newInstance для данного класса
     companion object {
         fun newInstance(): ClassesFragment = ClassesFragment()
@@ -58,6 +63,8 @@ class ClassesFragment:
         viewModel = _viewModel
         // Подписка на ViewModel
         this.viewModel.subscribe().observe(viewLifecycleOwner) { renderData(it) }
+        // Загрузка данных
+        viewModel.getData(settings.currentData.get(Calendar.DAY_OF_WEEK).convertDayToIndex())
     }
 
     private fun renderData(appState: AppState) {

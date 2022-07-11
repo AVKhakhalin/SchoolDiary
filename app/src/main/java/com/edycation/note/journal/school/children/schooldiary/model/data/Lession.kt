@@ -5,13 +5,13 @@ import java.util.*
 
 data class Lession(
     val type: ClassesTypes,
-    val startDate: String,
+    val startDate: ClassesDate,
     val position: Int,
     val isAdditional: Boolean,
     val isOpenIn: Boolean,
     val examDateString: String,
     val homeWork: HomeWork,
-    val examDate: ExamDate = examDateString.getExamDate(),
+    val examDate: ClassesDate = examDateString.getExamDateClassesDate(),
     val startTime: Calendar = startDate.getClassesStartTime(position, isAdditional),
     val name: String = type.getClassesName(),
     val teacherName: String = type.getClassesTeacherName()

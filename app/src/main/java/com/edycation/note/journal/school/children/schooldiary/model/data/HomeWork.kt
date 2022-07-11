@@ -6,7 +6,7 @@ import com.edycation.note.journal.school.children.schooldiary.utils.getHomeworkD
 
 data class HomeWork(
     val typeLession: ClassesTypes,
-    val endDate: String,
+    val endDate: ClassesDate,
     val nameLession: String = typeLession.getClassesName(),
     val description: String = typeLession.getHomeworkDescription()
 )

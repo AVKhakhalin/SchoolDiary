@@ -6,15 +6,21 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.edycation.note.journal.school.children.schooldiary.databinding.FragmentHomeBinding
 import com.edycation.note.journal.school.children.schooldiary.model.base.BaseFragment
 import com.edycation.note.journal.school.children.schooldiary.model.data.AppState
+import com.edycation.note.journal.school.children.schooldiary.repository.settings.Settings
 import com.edycation.note.journal.school.children.schooldiary.utils.HOME_FRAGMENT_SCOPE
+import com.edycation.note.journal.school.children.schooldiary.utils.convertDayToIndex
 import com.edycation.note.journal.school.children.schooldiary.view.fragments.classes.ClassesFragmentViewModel
+import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListRecyclerAdapter
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.java.KoinJavaComponent
 import org.koin.java.KoinJavaComponent.getKoin
+import java.util.*
 
 class HomeFragment:
     BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -25,6 +31,8 @@ class HomeFragment:
     private lateinit var showHomeFragmentScope: Scope
     // Навигационные кнопки
     private lateinit var classesButton: ImageView
+    // Класс с настройками для получения текущей даты
+    private val settings: Settings = getKoin().get()
     // newInstance для данного класса
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
@@ -61,11 +69,20 @@ class HomeFragment:
         viewModel = _viewModel
         // Подписка на ViewModel
         this.viewModel.subscribe().observe(viewLifecycleOwner) { renderData(it) }
+        // Загрузка данных
+        viewModel.getData(settings.currentData.get(Calendar.DAY_OF_WEEK).convertDayToIndex())
     }
 
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
+                appState.lessionsList?.let{ lessionsList ->
+                    // Установка списка домашних заданий
+                    val recyclerView: RecyclerView = binding.homeworkContent
+                    recyclerView.layoutManager = LinearLayoutManager(
+                        requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    recyclerView.adapter = HomeworkListRecyclerAdapter(lessionsList)
+                }
             }
             is AppState.Loading -> {
                 // Изменение внешнего вида фрагмента
