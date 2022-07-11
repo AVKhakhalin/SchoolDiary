@@ -3,7 +3,6 @@ package com.edycation.note.journal.school.children.schooldiary.view.fragments.ho
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -15,16 +14,11 @@ import com.edycation.note.journal.school.children.schooldiary.model.data.AppStat
 import com.edycation.note.journal.school.children.schooldiary.repository.settings.Settings
 import com.edycation.note.journal.school.children.schooldiary.utils.HOME_FRAGMENT_SCOPE
 import com.edycation.note.journal.school.children.schooldiary.utils.convertDayToIndex
-import com.edycation.note.journal.school.children.schooldiary.view.fragments.classes.ClassesFragmentViewModel
 import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListPageAdapter
-import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListRecyclerAdapter
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
-import org.koin.java.KoinJavaComponent
 import org.koin.java.KoinJavaComponent.getKoin
 import java.util.*
 
