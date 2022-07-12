@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,8 @@ import com.edycation.note.journal.school.children.schooldiary.model.data.AppStat
 import com.edycation.note.journal.school.children.schooldiary.repository.settings.Settings
 import com.edycation.note.journal.school.children.schooldiary.utils.HOME_FRAGMENT_SCOPE
 import com.edycation.note.journal.school.children.schooldiary.utils.convertDayToIndex
+import com.edycation.note.journal.school.children.schooldiary.utils.convertIntToDecadeString
+import com.edycation.note.journal.school.children.schooldiary.utils.convertIntToUnitString
 import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListPageAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -33,6 +36,16 @@ class HomeFragment:
     private lateinit var classesButton: ImageView
     // Класс с настройками для получения текущей даты
     private val settings: Settings = getKoin().get()
+    // Paging 3.0
+    private lateinit var homeworkRecyclerView: RecyclerView
+    private lateinit var homeworkListPageAdapter: HomeworkListPageAdapter
+    // Переменные для табло времени до экзамена
+    private lateinit var decadeDays: TextView
+    private lateinit var unitDays: TextView
+    private lateinit var decadeHours: TextView
+    private lateinit var unitHours: TextView
+    private lateinit var decadeMinuts: TextView
+    private lateinit var unitMinuts: TextView
     // newInstance для данного класса
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
@@ -61,6 +74,10 @@ class HomeFragment:
         initViewModel()
         // Инициализация навигационных кнопок
         initNavigaionsButtons()
+        // Инициализация списка домашних заданий
+        initHomework()
+        // Инициализация переменных для табло времени до экзамена
+        initTimeUntilExams()
     }
 
     // Инициализация ViewModel
@@ -76,21 +93,21 @@ class HomeFragment:
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
-                appState?.let {
-                    // Запуск получения данных для Paging 3.0 и их отображение
-                    val recyclerView: RecyclerView = binding.homeworkContent
-                    recyclerView.layoutManager = LinearLayoutManager(
-                        requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                    val homeworkListPageAdapter: HomeworkListPageAdapter =
-                        HomeworkListPageAdapter(requireContext())
-                    recyclerView.adapter = homeworkListPageAdapter
-
-                    lifecycleScope.launch {
-                        viewModel.lession.collectLatest { pagedData ->
-                            homeworkListPageAdapter.submitData(pagedData)
-                        }
+                // Запуск получения данных для Paging 3.0 и их отображение
+                lifecycleScope.launch {
+                    viewModel.lession.collectLatest { pagedData ->
+                        homeworkListPageAdapter.submitData(pagedData)
                     }
                 }
+            }
+            is AppState.SuccessTime -> {
+                // Отображение времени до экзамена (сдачи домашней работы)
+                decadeDays.text = appState.examTime.days.convertIntToDecadeString()
+                unitDays.text = appState.examTime.days.convertIntToUnitString()
+                decadeHours.text = appState.examTime.hours.convertIntToDecadeString()
+                unitHours.text = appState.examTime.hours.convertIntToUnitString()
+                decadeMinuts.text = appState.examTime.minuts.convertIntToDecadeString()
+                unitMinuts.text = appState.examTime.minuts.convertIntToUnitString()
             }
             is AppState.Loading -> {
                 // Изменение внешнего вида фрагмента
@@ -107,5 +124,25 @@ class HomeFragment:
         classesButton.setOnClickListener {
             viewModel.router.navigateTo(viewModel.screens.classesScreen())
         }
+    }
+
+    // Инициализация списка домашних заданий по технологии Paging 3.0
+    private fun initHomework() {
+        homeworkRecyclerView = binding.homeworkContent
+        homeworkRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
+            LinearLayoutManager.HORIZONTAL, false)
+        homeworkListPageAdapter = HomeworkListPageAdapter(requireContext())
+        homeworkRecyclerView.adapter = homeworkListPageAdapter
+    }
+
+    // Инициализация переменных для табло времени до экзамена
+    private fun initTimeUntilExams() {
+        // Инициализация переменных для табло времени до экзамена
+        decadeDays = binding.examsTimeDaysDecade
+        unitDays = binding.examsTimeDaysUnits
+        decadeHours = binding.examsTimeHoursDecade
+        unitHours = binding.examsTimeHoursUnits
+        decadeMinuts = binding.examsTimeMinutesDecade
+        unitMinuts = binding.examsTimeMinutesUnits
     }
 }

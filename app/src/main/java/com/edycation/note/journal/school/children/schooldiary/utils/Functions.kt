@@ -1,11 +1,13 @@
 package com.edycation.note.journal.school.children.schooldiary.utils
 
+import android.util.Log
 import com.edycation.note.journal.school.children.schooldiary.R
 import com.edycation.note.journal.school.children.schooldiary.model.data.ClassesDate
 import com.edycation.note.journal.school.children.schooldiary.model.data.HomeWork
 import com.edycation.note.journal.school.children.schooldiary.model.data.Lession
 import com.edycation.note.journal.school.children.schooldiary.utils.resources.ResourcesProvider
 import org.koin.java.KoinJavaComponent.getKoin
+import java.text.SimpleDateFormat
 import java.util.*
 
 // Получение названия урока
@@ -90,11 +92,11 @@ fun ClassesTypes.getClassesTeacherName(): String {
     }
 }
 
-// Получение времени урока
-fun ClassesDate.getClassesStartTime(position: Int, isAdditional: Boolean): Calendar {
+// Получение преобразование ClassesDate в Calendar
+fun ClassesDate.convertClassesDateToCalendar(position: Int, isAdditional: Boolean): Calendar {
     val calendarStart: Calendar = Calendar.getInstance()
     val beginDay: Int = this.day
-    val beginMonth: Int = this.month
+    val beginMonth: Int = this.month - 1
     val beginYear: Int = this.year
     // this - номер урока
     if (!isAdditional) {
@@ -230,29 +232,45 @@ fun String.getExamDateClassesDate(): ClassesDate {
 }
 
 // Получение даты экзамена предмета по его типу ClassesTypes
-fun ClassesTypes.getExamDateString(): String {
-    return when(this) {
-        ClassesTypes.HISTORY -> "01.08.2022"
-        ClassesTypes.PHYSICAL_EDUCATION -> "02.08.2022"
-        ClassesTypes.LITERATURE -> "03.08.2022"
-        ClassesTypes.PHYSICS -> "04.08.2022"
-        ClassesTypes.MATHEMATICS -> "05.08.2022"
-        ClassesTypes.BIOLOGY -> "06.08.2022"
-        ClassesTypes.RUSSIA_LANGUAGE -> "07.08.2022"
-        ClassesTypes.ALGEBRA -> "08.08.2022"
-        ClassesTypes.GEOGRAPHY -> "09.08.2022"
-        ClassesTypes.MUSIC -> "10.08.2022"
-        ClassesTypes.GEOMETRY -> "11.08.2022"
-        ClassesTypes.ASTRONOMY -> "12.08.2022"
-        ClassesTypes.ENGLISH_LANGUAGE -> "13.08.2022"
-        ClassesTypes.HISTORY_OF_RUSSIA -> "14.08.2022"
-        ClassesTypes.INFORMATICS -> "15.08.2022"
-        ClassesTypes.GENERAL_HISTORY -> "16.08.2022"
-        ClassesTypes.SOCIAL_SCIENCE -> "17.08.2022"
-        ClassesTypes.FRENCH_LANGUAGE -> "18.08.2022"
-        ClassesTypes.GERMAN_LANGUAGE -> "19.08.2022"
-        ClassesTypes.NO -> ""
-    }
+// На выполнение задания отводится неделя, но не более даты самого последнего занятия
+fun ClassesDate.getExamDateString(): ClassesDate {
+    val calendarTime: Calendar = Calendar.getInstance()
+    // !!! месяц нужно занижать на 1 единицу
+    calendarTime.set(this.year, this.month - 1, this.day)
+    calendarTime.add(Calendar.DATE, DELTA_EXAMS)
+     // Проверка, не превышает ли дата экзамена дату завершения обучения
+    val endCalendarTime: Calendar = Calendar.getInstance()
+    // !!! месяц нужно занижать на 1 единицу
+    endCalendarTime.set(
+        END_CLASSES_DATE.year, END_CLASSES_DATE.month - 1, END_CLASSES_DATE.day)
+    return if (calendarTime.timeInMillis <= endCalendarTime.timeInMillis)
+        calendarTime.convertToClassesDate()
+    else
+        END_CLASSES_DATE
+}
+
+// Конвертация Calendar в ClassesDate
+fun Calendar.convertToClassesDate(): ClassesDate {
+    val currentTime = SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(this.time)
+    val startDate: Array<String> =
+        currentTime.split(".", "/", "|", "\\", " ").toTypedArray()
+    val beginDay: Int = if (startDate[0].isNotEmpty()) startDate[0].toInt() else 0
+    val beginMonth: Int = if (startDate[1].isNotEmpty()) startDate[1].toInt() else 0
+    val beginYear: Int = if (startDate[2].isNotEmpty()) startDate[2].toInt() else 0
+    return ClassesDate(beginYear, beginMonth, beginDay)
+}
+
+// Добавление в классе ClassesDate заданного количества дней (или их вычитание)
+fun ClassesDate.changeDays(numberDays: Int) {
+    // Получение даты большей на несколько дней
+    val calendarTime: Calendar = Calendar.getInstance()
+    // !!! месяц нужно занижать на 1 единицу
+    calendarTime.set(this.year,this.month - 1, this.day)
+    calendarTime.add(Calendar.DATE, numberDays)
+    val newClassesDate = calendarTime.convertToClassesDate()
+    this.year = newClassesDate.year
+    this.month = newClassesDate.month
+    this.day = newClassesDate.day
 }
 
 // Установка текущего расписания
@@ -262,121 +280,121 @@ fun Array<MutableList<Lession>>.initiateClasses() {
     var indexOfDay: Int = StudyDayOfWeek.MONDAY.ordinal
     var classesType: ClassesTypes = ClassesTypes.RUSSIA_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,1,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.FRENCH_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,2,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.GEOGRAPHY
     this[indexOfDay].add(Lession(classesType, startDate,3,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.MATHEMATICS
     this[indexOfDay].add(Lession(classesType, startDate,4,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.LITERATURE
     this[indexOfDay].add(Lession(classesType, startDate,5,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
 
     indexOfDay = StudyDayOfWeek.TUESDAY.ordinal
     classesType = ClassesTypes.RUSSIA_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,1,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.LITERATURE
     this[indexOfDay].add(Lession(classesType, startDate,2,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.MUSIC
     this[indexOfDay].add(Lession(classesType, startDate,3,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.FRENCH_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,4,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.MATHEMATICS
     this[indexOfDay].add(Lession(classesType, startDate,5,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
 
     indexOfDay = StudyDayOfWeek.WEDNESDAY.ordinal
     classesType = ClassesTypes.INFORMATICS
     this[indexOfDay].add(Lession(classesType, startDate,1,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.RUSSIA_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,2,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.MATHEMATICS
     this[indexOfDay].add(Lession(classesType, startDate,3,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.MATHEMATICS
     this[indexOfDay].add(Lession(classesType, startDate,4,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.LITERATURE
     this[indexOfDay].add(Lession(classesType, startDate,5,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.PHYSICS
     this[indexOfDay].add(Lession(classesType, startDate,6,true,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
 
     indexOfDay = StudyDayOfWeek.THURSDAY.ordinal
     classesType = ClassesTypes.MUSIC
     this[indexOfDay].add(Lession(classesType, startDate,1,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.GEOGRAPHY
     this[indexOfDay].add(Lession(classesType, startDate,2,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.ALGEBRA
     this[indexOfDay].add(Lession(classesType, startDate,3,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.BIOLOGY
     this[indexOfDay].add(Lession(classesType, startDate,4,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.GERMAN_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,5,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.GENERAL_HISTORY
     this[indexOfDay].add(Lession(classesType, startDate,6,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.PHYSICAL_EDUCATION
     this[indexOfDay].add(Lession(classesType, startDate,7,true,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
 
     indexOfDay = StudyDayOfWeek.FRIDAY.ordinal
     classesType = ClassesTypes.SOCIAL_SCIENCE
     this[indexOfDay].add(Lession(classesType, startDate,1,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.HISTORY_OF_RUSSIA
     this[indexOfDay].add(Lession(classesType, startDate,2,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.PHYSICS
     this[indexOfDay].add(Lession(classesType, startDate,3,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.GERMAN_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,4,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.INFORMATICS
     this[indexOfDay].add(Lession(classesType, startDate,5,true,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.RUSSIA_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,7,true,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
 
     indexOfDay = StudyDayOfWeek.SATURDAY.ordinal
     classesType = ClassesTypes.BIOLOGY
     this[indexOfDay].add(Lession(classesType, startDate,1,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.ENGLISH_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,2,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.GENERAL_HISTORY
     this[indexOfDay].add(Lession(classesType, startDate,3,false,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.ASTRONOMY
     this[indexOfDay].add(Lession(classesType, startDate,4,true,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
     classesType = ClassesTypes.RUSSIA_LANGUAGE
     this[indexOfDay].add(Lession(classesType, startDate,6,false,
-        false, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        false, endDate, HomeWork(classesType, startDate.getExamDateString())))
 
     indexOfDay = StudyDayOfWeek.SUNDAY.ordinal
     classesType = ClassesTypes.PHYSICAL_EDUCATION
     this[indexOfDay].add(Lession(classesType, startDate,1,true,
-        true, classesType.getExamDateString(), HomeWork(classesType, endDate)))
+        true, endDate, HomeWork(classesType, startDate.getExamDateString())))
 }
 
 // Конвертер дня недели из ClassesTypes в индекс StudyDayOfWeek
@@ -406,4 +424,34 @@ fun Long.dayEndingCreate(): String {
         in 2..4 -> resourcesProviderImpl.getString(R.string.days_variation_two)
         else -> resourcesProviderImpl.getString(R.string.days_variation_three)
     }
+}
+
+fun Calendar.setNewDate(sourceCalendar: Calendar) {
+    // Получение даты из календаря
+    val currentTime = SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(sourceCalendar.time)
+    val startDate: Array<String> =
+        currentTime.split(".", "/", "|", "\\", " ").toTypedArray()
+    val beginDay: Int = if (startDate[0].isNotEmpty()) startDate[0].toInt() else 0
+    val beginMonth: Int = if (startDate[1].isNotEmpty()) startDate[1].toInt() else 0
+    val beginYear: Int = if (startDate[2].isNotEmpty()) startDate[2].toInt() else 0
+    // Установка новой даты в календарь
+    this.set(beginYear, beginMonth - 1, beginDay)
+}
+
+// Конвертация десятичного числа в десятичный символ
+fun Int.convertIntToDecadeString(): String {
+    val result: String = this.toString()
+    return if (result.length > 1)
+        result[0].toString()
+    else
+        ZERO_STRING
+}
+
+// Конвертация десятичного числа в десятичный символ
+fun Int.convertIntToUnitString(): String {
+    val result: String = this.toString()
+    return if (result.length > 1)
+        result[1].toString()
+    else
+        result
 }
