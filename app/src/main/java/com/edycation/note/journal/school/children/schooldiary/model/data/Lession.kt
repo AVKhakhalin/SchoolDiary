@@ -11,7 +11,8 @@ data class Lession(
     val isOpenIn: Boolean,
     val endDate: ClassesDate,
     val homeWork: HomeWork,
-    val startTime: Calendar = startDate.convertClassesDateToCalendar(position, isAdditional),
+    val startTime: Calendar = startDate.convertStartClassesTimeToCalendar(position, isAdditional),
+    val endTime: Calendar = startDate.convertEndClassesTimeToCalendar(position, isAdditional),
     val name: String = type.getClassesName(),
     val teacherName: String = type.getClassesTeacherName()
 )

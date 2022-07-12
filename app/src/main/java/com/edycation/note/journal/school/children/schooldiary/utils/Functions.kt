@@ -92,8 +92,8 @@ fun ClassesTypes.getClassesTeacherName(): String {
     }
 }
 
-// Получение преобразование ClassesDate в Calendar
-fun ClassesDate.convertClassesDateToCalendar(position: Int, isAdditional: Boolean): Calendar {
+// Получение и преобразование ClassesDate в Calendar для начального времени занятий
+fun ClassesDate.convertStartClassesTimeToCalendar(position: Int, isAdditional: Boolean): Calendar {
     val calendarStart: Calendar = Calendar.getInstance()
     val beginDay: Int = this.day
     val beginMonth: Int = this.month - 1
@@ -173,6 +173,89 @@ fun ClassesDate.convertClassesDateToCalendar(position: Int, isAdditional: Boolea
         }
     }
 }
+
+// Получение и преобразование ClassesDate в Calendar для начального времени занятий
+fun ClassesDate.convertEndClassesTimeToCalendar(position: Int, isAdditional: Boolean): Calendar {
+    val calendarStart: Calendar = Calendar.getInstance()
+    val beginDay: Int = this.day
+    val beginMonth: Int = this.month - 1
+    val beginYear: Int = this.year
+    // this - номер урока
+    if (!isAdditional) {
+        return when (position) {
+            1 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 8, 45)
+                calendarStart
+            }
+            2 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 9, 45)
+                calendarStart
+            }
+            3 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 10, 45)
+                calendarStart
+            }
+            4 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 11, 45)
+                calendarStart
+            }
+            5 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 12, 45)
+                calendarStart
+            }
+            6 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 13, 45)
+                calendarStart
+            }
+            7 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 14, 45)
+                calendarStart
+            }
+            8 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 15, 45)
+                calendarStart
+            }
+            else -> calendarStart
+        }
+    } else {
+        return when (position) {
+            1 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 10, 35)
+                calendarStart
+            }
+            2 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 10, 35)
+                calendarStart
+            }
+            3 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 11, 35)
+                calendarStart
+            }
+            4 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 12, 35)
+                calendarStart
+            }
+            5 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 13, 35)
+                calendarStart
+            }
+            6 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 14, 35)
+                calendarStart
+            }
+            7 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 15, 35)
+                calendarStart
+            }
+            8 -> {
+                calendarStart.set(beginYear, beginMonth, beginDay, 16, 35)
+                calendarStart
+            }
+            else -> calendarStart
+        }
+    }
+}
+
 
 
 // Получение имени учителя

@@ -9,6 +9,7 @@ import com.edycation.note.journal.school.children.schooldiary.model.base.BaseVie
 import com.edycation.note.journal.school.children.schooldiary.model.data.AppState
 import com.edycation.note.journal.school.children.schooldiary.repository.settings.Settings
 import com.edycation.note.journal.school.children.schooldiary.utils.MAX_PAGE_SIZE
+import com.edycation.note.journal.school.children.schooldiary.utils.REFRESH_EXAM_TIME_DELAY
 import com.edycation.note.journal.school.children.schooldiary.utils.convertDayToIndex
 import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListPageSource
 import kotlinx.coroutines.Dispatchers
@@ -49,7 +50,7 @@ class HomeFragmentViewModel(
             withContext(Dispatchers.IO) {
                 _mutableLiveData.postValue(interactor.getExamTime(dayIndex))
             }
-            delay(1000L)
+            delay(REFRESH_EXAM_TIME_DELAY)
         }
     }
 
