@@ -5,12 +5,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.edycation.note.journal.school.children.schooldiary.databinding.FragmentClassesBinding
 import com.edycation.note.journal.school.children.schooldiary.model.base.BaseFragment
 import com.edycation.note.journal.school.children.schooldiary.model.data.AppState
 import com.edycation.note.journal.school.children.schooldiary.repository.settings.Settings
 import com.edycation.note.journal.school.children.schooldiary.utils.CLASSES_FRAGMENT_SCOPE
 import com.edycation.note.journal.school.children.schooldiary.utils.convertDayToIndex
+import com.edycation.note.journal.school.children.schooldiary.view.fragments.classes.list.ClassesListPageAdapter
+import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListPageAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.java.KoinJavaComponent.getKoin
@@ -65,6 +72,18 @@ class ClassesFragment:
         this.viewModel.subscribe().observe(viewLifecycleOwner) { renderData(it) }
         // Загрузка данных
         viewModel.getData(settings.currentData.get(Calendar.DAY_OF_WEEK).convertDayToIndex())
+
+        val recyclerView: RecyclerView = binding.classesRecyclerList
+        recyclerView.layoutManager = LinearLayoutManager(
+            requireContext(), LinearLayoutManager.VERTICAL, false)
+        val classesListPageAdapter: ClassesListPageAdapter = ClassesListPageAdapter(requireContext())
+        recyclerView.adapter = classesListPageAdapter
+
+        lifecycleScope.launch {
+            viewModel.lession.collectLatest { pagedData ->
+                classesListPageAdapter.submitData(pagedData)
+            }
+        }
     }
 
     private fun renderData(appState: AppState) {

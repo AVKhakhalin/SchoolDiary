@@ -10,9 +10,11 @@ val START_CLASSES_DATE: ClassesDate = ClassesDate(2022,7,10)
 val END_CLASSES_DATE: ClassesDate = ClassesDate(2022, 7,30)
 const val NUMBER_EDUCATION_DAYS_IN_WEEK: Int = 7
 const val DATE_FORMAT: String = "dd/MM/yyyy"
+const val TIME_FORMAT: String = "HH:mm"
 const val DELTA_EXAMS: Int = 7
 const val ZERO_STRING: String = "0"
 const val MILLISECONDS_IN_DAY: Long = 86400000
+const val REFRESH_EXAM_TIME_DELAY: Long = 1000L
 
 enum class ClassesTypes {
     HISTORY,
@@ -49,6 +51,6 @@ enum class StudyDayOfWeek {
 
 // Настройки Paging 3.0
 const val INITIAL_PAGE_NUMBER: Int = 1
-const val MAX_PAGE_SIZE: Int = 3
-const val MAX_ELEMENTS_ON_PAGE: Int = 2
+const val MAX_PAGE_SIZE: Int = 5
+const val MAX_ELEMENTS_ON_PAGE: Int = 10
 const val INFINITY_KOEFFICIENT: Int = 10000
