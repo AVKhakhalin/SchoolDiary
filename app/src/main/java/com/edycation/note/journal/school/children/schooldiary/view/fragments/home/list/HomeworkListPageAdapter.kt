@@ -2,6 +2,7 @@ package com.edycation.note.journal.school.children.schooldiary.view.fragments.ho
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.edycation.note.journal.school.children.schooldiary.utils.resources.Re
 import org.koin.java.KoinJavaComponent
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.time.Duration.Companion.milliseconds
 
 class HomeworkListPageAdapter(context: Context):
     PagingDataAdapter<Lession, HomeworkViewHolder>(LessionDiffItemCallback) {
@@ -50,11 +52,11 @@ class HomeworkViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
             // Установка названия предмета для домашнего задания
             homeWorkTitle.text = lession.name
-            // Установка дней до экзамена
+            // Усталось дней до экзамена
             val examDate: Calendar = Calendar.getInstance()
             //!!! месяц нужно занижать на 1 единицу
-            examDate.set(lession.examDate.year, lession.examDate.month - 1,
-                lession.examDate.day)
+            examDate.set(lession.homeWork.examDate.year, lession.homeWork.examDate.month - 1,
+                lession.homeWork.examDate.day)
             val daysUntilExam: Long = TimeUnit.DAYS.convert(
                 examDate.timeInMillis - Date().time, TimeUnit.MILLISECONDS)
             homeWorkDaysExist.text = "$daysUntilExam ${daysUntilExam.dayEndingCreate()} " +
@@ -79,9 +81,12 @@ private object LessionDiffItemCallback: DiffUtil.ItemCallback<Lession>() {
                 && oldItem.position == newItem.position
                 && oldItem.isAdditional == newItem.isAdditional
                 && oldItem.isOpenIn == newItem.isOpenIn
-                && oldItem.homeWork.endDate.year == newItem.homeWork.endDate.year
-                && oldItem.homeWork.endDate.month == newItem.homeWork.endDate.month
-                && oldItem.homeWork.endDate.day == newItem.homeWork.endDate.day
+                && oldItem.endDate.year == newItem.endDate.year
+                && oldItem.endDate.month == newItem.endDate.month
+                && oldItem.endDate.day == newItem.endDate.day
                 && oldItem.homeWork.description == newItem.homeWork.description
+                && oldItem.homeWork.examDate.year == newItem.homeWork.examDate.year
+                && oldItem.homeWork.examDate.month == newItem.homeWork.examDate.month
+                && oldItem.homeWork.examDate.day == newItem.homeWork.examDate.day
     }
 }

@@ -12,9 +12,11 @@ import com.edycation.note.journal.school.children.schooldiary.utils.MAX_PAGE_SIZ
 import com.edycation.note.journal.school.children.schooldiary.utils.convertDayToIndex
 import com.edycation.note.journal.school.children.schooldiary.view.fragments.home.list.HomeworkListPageSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.java.KoinJavaComponent
+import java.lang.Thread.sleep
 import java.util.*
 
 class HomeFragmentViewModel(
@@ -39,10 +41,17 @@ class HomeFragmentViewModel(
         }
     }
 
-    private suspend fun startInteractor(dayIndex: Int) =
+    private suspend fun startInteractor(dayIndex: Int) {
         withContext(Dispatchers.IO) {
             _mutableLiveData.postValue(interactor.getData(dayIndex))
         }
+        while (true) {
+            withContext(Dispatchers.IO) {
+                _mutableLiveData.postValue(interactor.getExamTime(dayIndex))
+            }
+            delay(1000L)
+        }
+    }
 
     override fun handleError(error: Throwable) {
         _mutableLiveData.postValue(AppState.Error(error))
