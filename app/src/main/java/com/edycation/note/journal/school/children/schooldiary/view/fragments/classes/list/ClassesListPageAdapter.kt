@@ -3,21 +3,15 @@ package com.edycation.note.journal.school.children.schooldiary.view.fragments.cl
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.edycation.note.journal.school.children.schooldiary.R
+import com.edycation.note.journal.school.children.schooldiary.databinding.ClassesListRecyclerviewItemStandartBinding
 import com.edycation.note.journal.school.children.schooldiary.model.data.Lession
 import com.edycation.note.journal.school.children.schooldiary.utils.TIME_FORMAT
-import com.edycation.note.journal.school.children.schooldiary.utils.dayEndingCreate
-import com.edycation.note.journal.school.children.schooldiary.utils.resources.ResourcesProvider
-import org.koin.java.KoinJavaComponent
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class ClassesListPageAdapter(context: Context):
     PagingDataAdapter<Lession, ClassesViewHolder>(LessionDiffItemCallback) {
@@ -26,8 +20,8 @@ class ClassesListPageAdapter(context: Context):
     //endregion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassesViewHolder {
-        return ClassesViewHolder(layoutInflater.inflate(
-            R.layout.classes_list_recyclerview_item_standart, parent, false))
+        return ClassesViewHolder(ClassesListRecyclerviewItemStandartBinding.inflate(
+            layoutInflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: ClassesViewHolder, position: Int) {
@@ -43,18 +37,16 @@ class ClassesListPageAdapter(context: Context):
     }
 }
 
-class ClassesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class ClassesViewHolder(
+    private val binding: ClassesListRecyclerviewItemStandartBinding
+): RecyclerView.ViewHolder(binding.root) {
     @SuppressLint("SetTextI18n")
     fun bind(lession: Lession?) {
         lession?.let {
-            val classesTitle: TextView = itemView.findViewById(R.id.classes_info_class_title)
-            val teacherName: TextView = itemView.findViewById(R.id.classes_info_teacher_name)
-            val classTime: TextView = itemView.findViewById(R.id.class_time)
-
             // Установка названия предмета для домашнего задания
-            classesTitle.text = lession.name
+            binding.classesInfoClassTitle.text = lession.name
             // Установка ФИО учителя
-            teacherName.text = lession.teacherName
+            binding.classesInfoTeacherName.text = lession.teacherName
             // Установка времени занятия
             val startClassTime: Calendar = lession.startTime
             val startTimeString: String = SimpleDateFormat(TIME_FORMAT,
@@ -62,7 +54,7 @@ class ClassesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val endClassTime: Calendar = lession.endTime
             val endTimeString: String = SimpleDateFormat(TIME_FORMAT,
                 Locale.getDefault()).format(endClassTime.time)
-            classTime.text = "$startTimeString-$endTimeString"
+            binding.classTime.text = "$startTimeString-$endTimeString"
         }
     }
 }
