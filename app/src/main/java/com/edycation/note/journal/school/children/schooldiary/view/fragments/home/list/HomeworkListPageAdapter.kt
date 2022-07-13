@@ -2,22 +2,19 @@ package com.edycation.note.journal.school.children.schooldiary.view.fragments.ho
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.edycation.note.journal.school.children.schooldiary.R
+import com.edycation.note.journal.school.children.schooldiary.databinding.HomeworkListRecyclerviewItemBinding
 import com.edycation.note.journal.school.children.schooldiary.model.data.Lession
 import com.edycation.note.journal.school.children.schooldiary.utils.dayEndingCreate
 import com.edycation.note.journal.school.children.schooldiary.utils.resources.ResourcesProvider
 import org.koin.java.KoinJavaComponent
 import java.util.*
 import java.util.concurrent.TimeUnit
-import kotlin.time.Duration.Companion.milliseconds
 
 class HomeworkListPageAdapter(context: Context):
     PagingDataAdapter<Lession, HomeworkViewHolder>(LessionDiffItemCallback) {
@@ -26,8 +23,8 @@ class HomeworkListPageAdapter(context: Context):
     //endregion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeworkViewHolder {
-        return HomeworkViewHolder(layoutInflater.inflate(
-            R.layout.homework_list_recyclerview_item, parent, false))
+        return HomeworkViewHolder(HomeworkListRecyclerviewItemBinding.inflate(
+            layoutInflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: HomeworkViewHolder, position: Int) {
@@ -35,7 +32,9 @@ class HomeworkListPageAdapter(context: Context):
     }
 }
 
-class HomeworkViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class HomeworkViewHolder(
+    private val binding: HomeworkListRecyclerviewItemBinding
+): RecyclerView.ViewHolder(binding.root) {
     /** Исходные данные */ //region
     // Получение доступа к ресурсам
     private val resourcesProviderImpl: ResourcesProvider = KoinJavaComponent.getKoin().get()
@@ -44,14 +43,8 @@ class HomeworkViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     @SuppressLint("SetTextI18n")
     fun bind(lession: Lession?) {
         lession?.let {
-            val homeWorkTitle: TextView = itemView.findViewById(R.id.homework_item_title)
-            val homeWorkDaysExist: TextView =
-                itemView.findViewById(R.id.homework_item_days_left_text)
-            val homeWorkDescription: TextView =
-                itemView.findViewById(R.id.homework_item_description)
-
             // Установка названия предмета для домашнего задания
-            homeWorkTitle.text = lession.name
+            binding.homeworkItemTitle.text = lession.name
             // Установка дней до экзамена
             val examDate: Calendar = Calendar.getInstance()
             //!!! месяц нужно занижать на 1 единицу
@@ -59,10 +52,11 @@ class HomeworkViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
                 lession.homeWork.examDate.day)
             val daysUntilExam: Long = TimeUnit.DAYS.convert(
                 examDate.timeInMillis - Date().time, TimeUnit.MILLISECONDS)
-            homeWorkDaysExist.text = "$daysUntilExam ${daysUntilExam.dayEndingCreate()} " +
-                    resourcesProviderImpl.getString(R.string.days_remain)
+            binding.homeworkItemDaysLeftText.text =
+                "$daysUntilExam ${daysUntilExam.dayEndingCreate()} " +
+                        resourcesProviderImpl.getString(R.string.days_remain)
             // Установка содержания домашнего задания
-            homeWorkDescription.text = lession.homeWork.description
+            binding.homeworkItemDescription.text = lession.homeWork.description
         }
     }
 }
